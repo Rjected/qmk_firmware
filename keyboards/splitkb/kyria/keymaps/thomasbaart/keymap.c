@@ -26,7 +26,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    KC_CCCV = SAFE_RANGE
+    KC_SAVE_VIM = SAFE_RANGE,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -34,21 +34,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | ESC    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
+ * | TILDE  |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | LSFT   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * | :w     |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LCTL   |   Z  |   X  |   C  |   V  |   B  | CCCV |      |  | Del  |Leader|   N  |   M  | ,  < | . >  | /  ? |  - _   |
- * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
- *                        | GUI  | Alt  |      | Space| Enter|  | Bspc | Space|      | Tab  | AltGr|
- *                        |      |      | Lower| Shift| Alt  |  |      | Nav  | Raise|      |      |
+ * | C-b    |   Z  |   X  |   C  |   V  |   B  | ESC  |Enter |  | Tab  |RGUI  |   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      | LALT |      | Space|Shift |  | Bspc | Space|      | LCTL |      |
+ *                        |      |      | Lower|      |      |  |      | Nav  | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [QWERTY] = LAYOUT(
-      KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
-      KC_LSFT, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-      KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_CCCV,   XXXXXXX, KC_DEL, KC_LEAD,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-              KC_LGUI, KC_LALT, MO(LOWER), MT(MOD_LSFT, KC_SPC), MT(MOD_LALT, KC_ENT), KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+      KC_TILDE,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
+      KC_SAVE_VIM, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+      C(KC_B), KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_ESC, KC_ENT, KC_TAB, KC_RGUI,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+              _______, KC_LALT, MO(LOWER), KC_SPC, KC_LSFT, KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_LCTL, _______
     ),
 /*
  * Lower Layer: Numpad, Media
@@ -94,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |      |      |      |                              | PgUp | Home | Up   | End  |      | ScrlLk |
+ * |        |      |      |      |      |      |                              | PgUp |      | Up   | End  |      | ScrlLk |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |                              | PgDn | Left | Down | Right|      | CapsLk |
+ * |        |      |      |      |      |      |                              | PgDn | Left | Down | Up   |Right | CapsLk |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -105,8 +105,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [NAV] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, KC_SLCK,
-      _______, _______, _______, _______, _______, _______,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_CAPS,
+      _______, _______, _______, _______, _______, _______,                                     KC_PGUP, KC_HOME, _______, KC_END,  _______, KC_SLCK,
+      _______, _______, _______, _______, _______, _______,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
@@ -156,84 +156,22 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, LOWER, RAISE, ADJUST);
 }
 
+// setting up save in vim
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case KC_CCCV:  // One key copy/paste
-            if (record->event.pressed) {
-                copy_paste_timer = timer_read();
-            } else {
-                if (timer_elapsed(copy_paste_timer) > TAPPING_TERM) {  // Hold, copy
-                    tap_code16(LCTL(KC_C));
-                } else { // Tap, paste
-                    tap_code16(LCTL(KC_V));
-                }
-            }
-            break;
-    }
-    return true;
-}
-
-
-bool is_alt_tab_active = false;
-uint16_t alt_tab_timer = 0;
-
-LEADER_EXTERNS();
-
-void matrix_scan_user(void) {
-    if (is_alt_tab_active) {
-        if (timer_elapsed(alt_tab_timer) > 1000) {
-            unregister_code(KC_LALT);
-            is_alt_tab_active = false;
-        }
-    }
-
-    LEADER_DICTIONARY() {
-        leading = false;
-        leader_end();
-
-        SEQ_ONE_KEY(KC_C) { // Inline Code
-            SEND_STRING("`` " SS_TAP(X_LEFT) SS_TAP(X_LEFT));
-        }
-        SEQ_ONE_KEY(KC_P) { // Invoke Password Manager
-            SEND_STRING(SS_LCTRL(SS_LALT("\\")));
-        }
-        SEQ_ONE_KEY(KC_S) { // Windows screenshot
-            SEND_STRING(SS_LGUI("\nS"));
-        }
-        SEQ_TWO_KEYS(KC_F, KC_P) { // Fusion Projection prefix
-            SEND_STRING("[Projection] ");
-        }
-        SEQ_TWO_KEYS(KC_B, KC_B) { // Basecone invoice description
-            SEND_STRING("[Leveranciersnaam] [Factuurnummer]");
-        }
-        SEQ_TWO_KEYS(KC_E, KC_S) { // Support email splitkb
-            SEND_STRING("support@splitkb.com");
-        }
-        SEQ_TWO_KEYS(KC_E, KC_T) { // Email splitkb
-            SEND_STRING("thomas@splitkb.com");
-        }
-        SEQ_TWO_KEYS(KC_E, KC_P) { // Email personal
-            SEND_STRING("mail@thomasbaart.nl");
-        }
-        SEQ_TWO_KEYS(KC_S, KC_D) { // Splitkb documentation
-            SEND_STRING("https://docs.splitkb.com/");
-        }
-        SEQ_TWO_KEYS(KC_S, KC_V) { // Splitkb VAT number
-            SEND_STRING("NL210593349B01");
-        }
-        SEQ_TWO_KEYS(KC_B, KC_C) { // Discord bongocat
-            SEND_STRING(":bongocat:\n");
-        }
-        SEQ_TWO_KEYS(KC_C, KC_B) { // Discord code block
-            SEND_STRING("```c" SS_LSFT("\n\n") "``` " SS_TAP(X_UP));
-        }
-        SEQ_TWO_KEYS(KC_Y, KC_S) { // Greeting
-            SEND_STRING("Yours sincerely,\n\nThomas Baart");
-        }
-        SEQ_THREE_KEYS(KC_M, KC_V, KC_G) { // Greeting
-            SEND_STRING("Met vriendelijke groet,\n\nThomas Baart");
-        }
-    }
+  switch (keycode) {
+    case KC_SAVE_VIM:
+      if (record->event.pressed) {
+        tap_code16(S(KC_SCLN));
+        tap_code(KC_W);
+        tap_code(KC_ENT);
+        // Do something when pressed
+      } else {
+        // Do something else when release
+      }
+      return false; // Skip all further processing of this key
+    default:
+      return true; // Process all other keycodes normally
+  }
 }
 
 #ifdef OLED_ENABLE
@@ -313,22 +251,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch (biton32(layer_state)) {
             case QWERTY:
-                // History scrubbing. For Adobe products, hold shift while moving
-                // backward to go forward instead.
-                if (clockwise) {
-                    tap_code16(C(KC_Z));
-                } else {
-                    tap_code16(C(KC_Y));
-                }
-                break;
             default:
-                // Switch between windows on Windows with alt tab.
+                // Switch between windows with cmd tab.
                 if (clockwise) {
-                    if (!is_alt_tab_active) {
-                        is_alt_tab_active = true;
-                        register_code(KC_LALT);
-                    }
-                    alt_tab_timer = timer_read();
                     tap_code16(KC_TAB);
                 } else {
                     tap_code16(S(KC_TAB));
@@ -338,13 +263,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         switch (biton32(layer_state)) {
             case QWERTY:
-                // Scrolling with PageUp and PgDn.
-                if (clockwise) {
-                    tap_code(KC_PGDN);
-                } else {
-                    tap_code(KC_PGUP);
-                }
-                break;
             default:
                 // Volume control.
                 if (clockwise) {
@@ -355,6 +273,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 break;
         }
     }
-    return true;
+    return false;
 }
 #endif
